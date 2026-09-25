@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:herbs_and_spices_app/constants/string_const.dart';
+import 'package:herbs_and_spices_app/core/app_colors.dart';
 import 'package:herbs_and_spices_app/routing/router.dart';
 
 void main() {
@@ -9,14 +10,20 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: StringConst.appTitle,
       theme: ThemeData(
         brightness: .light,
-        fontFamily: StringConst.appFontFamily
+        fontFamily: StringConst.appFontFamily,
+        scaffoldBackgroundColor: AppColors.offWhiteColor,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: AppColors.primaryGreenColor,
+          primary: AppColors.primaryGreenColor,
+          surface: AppColors.offWhiteColor,
+          brightness: .light,
+        ),
       ),
       routerConfig: router,
       builder: (ctx, child) => child!,
