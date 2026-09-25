@@ -15,4 +15,9 @@ class AppColors {
   static const selectedChipTextColor = Color(0xFFFBEAE8);
   static const badgeOrangeColor = Color(0xFFFFB366);
   static const discountRedColor = Color(0xFFBE1E2D);
+  static const cardPinkColor = Color(0xFFFCEAEB);
+  static const cardPeachColor = Color(0xFFF8D8C2);
+  static const cardBeigeColor = Color(0xFFE8DED3);
+  static const cardCreamColor = Color(0xFFEFE8DC);
+  static const cardSageColor = Color(0xFFE8F0E0);
 }
