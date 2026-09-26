@@ -144,10 +144,14 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         Positioned(
           left: 0,
           bottom: 0,
-          child: Image.asset(
-          product.image,
-            height: 290,
-        ),)
+          child: Hero(
+            tag: product.id,
+            child: Image.asset(
+              product.image,
+              height: 290,
+            ),
+          ),
+        ),
       ],
     );
   }
