@@ -14,8 +14,12 @@ class StringConst {
   static const wishlist = 'Wishlist';
   static const reels = 'Reels';
   static const account = 'Account';
+  static const details = 'Details';
+  static const checkOut = 'Check Out';
 
   static String pricePerGram(double price) => '\$${price.toStringAsFixed(2)}/g';
 
   static String percentOff(int percent) => '$percent % Off';
+
+  static String priceLabel(double price) => '\$${price.toStringAsFixed(0)}';
 }

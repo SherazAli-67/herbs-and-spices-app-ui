@@ -85,7 +85,7 @@ class AppTextStyles {
 
   static const chip = TextStyle(
     fontFamily: StringConst.appFontFamily,
-    fontSize: 18,
+    fontSize: 17,
     fontWeight: .w400,
     height: 1.5,
   );

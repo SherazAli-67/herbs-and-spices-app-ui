@@ -29,7 +29,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      // spacing: 17,
       children: [
         _buildHeader(),
         Expanded(
