@@ -6,7 +6,6 @@ import 'package:herbs_and_spices_app/core/app_colors.dart';
 import 'package:herbs_and_spices_app/core/app_data.dart';
 import 'package:herbs_and_spices_app/core/app_icons.dart';
 import 'package:herbs_and_spices_app/core/app_textstyles.dart';
-import 'package:herbs_and_spices_app/core/asset_res.dart';
 import 'package:herbs_and_spices_app/core/models/product.dart';
 import 'package:herbs_and_spices_app/presentation/widgets/app_pill_chip.dart';
 import 'package:herbs_and_spices_app/routing/router.dart';
@@ -29,30 +28,18 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.cardColor,
-      body: Stack(
-        children: [
-          Column(
-            children: [
-              _buildHeader(),
-              Expanded(child: _buildBody()),
-            ],
-          ),
-          Positioned(
-            left: 26,
-            right: 26,
-            bottom: MediaQuery.paddingOf(context).bottom + 12,
-            child: _buildBottomNav(),
-          ),
-        ],
-      ),
+    return Column(
+      // spacing: 17,
+      children: [
+        _buildHeader(),
+        Expanded(child: _buildBody()),
+      ],
     );
   }
 
   Widget _buildHeader() {
     return SizedBox(
-      height: 250,
+      // height: 250,
       width: double.infinity,
       child: Stack(
         clipBehavior: .none,
@@ -63,31 +50,17 @@ class _HomeScreenState extends State<HomeScreen> {
               fit: .fill,
             ),
           ),
-          Positioned.fill(
-            child: Opacity(
-              opacity: 0.18,
-              child: Image.asset(
-                AssetRes.imgTexture,
-                repeat: .repeat,
-                alignment: .topLeft,
-                fit: .none,
-                color: AppColors.whiteColor,
-                colorBlendMode: .softLight,
-              ),
-            ),
-          ),
           SafeArea(
             bottom: false,
             child: Padding(
-              padding: .symmetric(horizontal: 26),
+              padding: .only(left: 26, right: 12, bottom: 26),
               child: Column(
                 crossAxisAlignment: .start,
                 children: [
-                  const SizedBox(height: 8),
                   _buildTopNav(),
                   const SizedBox(height: 28),
                   Row(
-                    crossAxisAlignment: .start,
+                    crossAxisAlignment: .center,
                     children: [
                       Expanded(
                         child: Column(
@@ -131,8 +104,8 @@ class _HomeScreenState extends State<HomeScreen> {
     return Transform.rotate(
       angle: -0.16,
       child: SizedBox(
-        width: 89,
-        height: 93,
+        width: 77,
+        height: 77,
         child: Stack(
           alignment: .center,
           children: [
@@ -154,7 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
         _buildCategoryRail(),
         Expanded(
           child: Padding(
-            padding: .only(top: 8, right: 16),
+            padding: .only(right: 16),
             child: Column(
               children: [
                 _buildCuisineChips(),
@@ -171,8 +144,23 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildCategoryRail() {
     return SizedBox(
       width: 54,
-      child: Padding(
-        padding: .only(top: 40, bottom: 120),
+      child: Container(
+        // padding: .only(top: 40, bottom: 120),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(colors: [
+            AppColors.offWhiteColor,
+            AppColors.gradientColor2,
+            AppColors.gradientColor2,
+            AppColors.offWhiteColor
+          ],
+            stops: [
+              0,
+              0.27,
+              0.67,
+              1
+            ]
+          )
+        ),
         child: Column(
           mainAxisAlignment: .spaceEvenly,
           children: [

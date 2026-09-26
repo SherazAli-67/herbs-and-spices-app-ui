@@ -20,4 +20,5 @@ class AppColors {
   static const cardBeigeColor = Color(0xFFE8DED3);
   static const cardCreamColor = Color(0xFFEFE8DC);
   static const cardSageColor = Color(0xFFE8F0E0);
+  static const gradientColor2 = Color(0xffFFFDFD);
 }
