@@ -21,10 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   String _selectedCategory = AppData.categories[2];
   String _selectedCuisine = AppData.cuisineFilters.first;
 
-  List<Product> get _products => AppData.filteredProducts(
-        category: _selectedCategory,
-        cuisine: _selectedCuisine,
-      );
+  List<Product> get _products => AppData.filteredProducts(category: _selectedCategory, cuisine: _selectedCuisine,);
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Container(
               height: .infinity,
               decoration: BoxDecoration(
-                gradient: LinearGradient(colors: [
+               /* gradient: LinearGradient(colors: [
                   AppColors.offWhiteColor,
                   AppColors.gradientColor2,
                   AppColors.gradientColor2,
@@ -50,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       0.67,
                       1
                     ]
-                )
+                )*/
               ),
               child: Column(
                 mainAxisAlignment: .spaceEvenly,
@@ -72,20 +69,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                   height: 48,
                                   child: DecoratedBox(
                                     decoration: BoxDecoration(
-                                      color: AppColors.inkColor,
-                                      borderRadius: .horizontal(right: .circular(99)),
+                                      // color: AppColors.inkColor,
+                                      // borderRadius: .horizontal(right: .circular(99)),
                                     ),
                                   ),
                                 ),
                               ),
                             RotatedBox(
                               quarterTurns: 3,
-                              child: Text(
-                                category,
-                                style: _selectedCategory == category
-                                    ? AppTextStyles.categoryActive
-                                    : AppTextStyles.categoryIdle,
-                              ),
+                              //category,  _selectedCategory == category  ? AppTextStyles.categoryActive : AppTextStyles.categoryIdle,
+                              child:  const SizedBox()
                             ),
                           ],
                         ),
@@ -98,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Padding(padding: .only(top: 17), child: Column(
                     spacing: 22,
                     children: [
-                      _buildCuisineChips(),
+                      // _buildCuisineChips(),
                       Expanded(child: _buildProductGrid()),
                     ],
                   ),),
@@ -111,16 +104,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildHeader() {
     return SizedBox(
-      // height: 250,
       width: double.infinity,
       child: Stack(
         clipBehavior: .none,
         children: [
           Positioned.fill(
-            child: SvgPicture.asset(
-              AppIcons.icHeaderWave,
-              fit: .fill,
-            ),
+            //icHeaderWave, fit: fill
+            child: const SizedBox()
           ),
           SafeArea(
             bottom: false,
@@ -128,9 +118,21 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: .only(left: 26, right: 12, bottom: 26),
               child: Column(
                 crossAxisAlignment: .start,
+                spacing: 28,
                 children: [
-                  _buildTopNav(),
-                  const SizedBox(height: 28),
+                  Row(
+                    children: [
+                      //icDrawer
+                      const Spacer(),
+                      Row(
+                        spacing: 13,
+                        children: [
+                          //icSearch
+                          //icCart
+                        ],
+                      ),
+                    ],
+                  ),
                   Row(
                     crossAxisAlignment: .center,
                     children: [
@@ -139,12 +141,23 @@ class _HomeScreenState extends State<HomeScreen> {
                           crossAxisAlignment: .start,
                           spacing: 4,
                           children: [
-                            Text(StringConst.discover, style: AppTextStyles.discoverLabel,),
-                            Text(StringConst.yourTaste, style: AppTextStyles.discoverHero,),
+                            //discover, discoverLabel,
+                            //yourTaste, discoverHero
                           ],
                         ),
                       ),
-                      _buildOffBadge(),
+                      Stack(
+                        alignment: .center,
+                        children: [
+                          //icBadgeOff
+                          Transform.rotate(
+                            angle: -0.33,
+
+                            //tenPercentOff, badgeOff
+                            child: const SizedBox()
+                          ),
+                        ],
+                      )
                     ],
                   ),
                 ],
@@ -152,42 +165,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildTopNav() {
-    return Row(
-      children: [
-        SvgPicture.asset(AppIcons.icDrawer, width: 26, height: 26,),
-        const Spacer(),
-        Row(
-          spacing: 13,
-          children: [
-            SvgPicture.asset(AppIcons.icSearch, width: 29, height: 29,),
-            SvgPicture.asset(AppIcons.icCart, width: 26, height: 26,),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget _buildOffBadge() {
-    return Transform.rotate(
-      angle: -0.16,
-      child: SizedBox(
-        width: 77,
-        height: 77,
-        child: Stack(
-          alignment: .center,
-          children: [
-            SvgPicture.asset(AppIcons.icBadgeOff, width: 78, height: 82,),
-            Transform.rotate(
-              angle: -0.33,
-              child: Text(StringConst.tenPercentOff, style: AppTextStyles.badgeOff,),
-            ),
-          ],
-        ),
       ),
     );
   }
@@ -261,7 +238,7 @@ class _HomeScreenState extends State<HomeScreen> {
         decoration: BoxDecoration(
           color: AppColors.cardColor,
           borderRadius: .circular(11),
-          boxShadow: [
+        /*  boxShadow: [
             BoxShadow(
               offset: Offset(-8.83, 8.83),
               blurRadius: 17.68,
@@ -274,7 +251,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 spreadRadius: 0,
                 color: AppColors.shadowColor.withValues(alpha: 0.5)
             )
-          ]
+          ]*/
         ),
         child: Column(
           crossAxisAlignment: .start,
@@ -283,34 +260,38 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 Container(
                   decoration: BoxDecoration(
-                    borderRadius: .only(topRight: .circular(11), topLeft: .circular(11)),
-                    color: product.cardTint
+                   /* borderRadius: .only(topRight: .circular(11), topLeft: .circular(11)),
+                    color: product.cardTint*/
                   ),
                   alignment: .center,
-                  child: Image.asset(product.image,fit: .cover,),
+                  //product.image, fit: cover
+                  child: const SizedBox()
                 ),
                 if(product.discountPercent != null)
                   Positioned(
                       right: 0,
                       top: 10,
-                      child: SvgPicture.asset(AppIcons.icDiscountRibbon),
+                      //icDiscountRibbon
+                      child: const SizedBox()
                   )
               ],
             ),
             Padding(padding: .symmetric(horizontal: 8.83, vertical: 17), child: Column(
               crossAxisAlignment: .start,
               children: [
-                Text(product.name, style: AppTextStyles.cardName,),
+                //product.name, style: cardName
                 Row(
                   children: [
-                    Expanded(child: Text('\$${product.price}/g', style: AppTextStyles.cardPrice,)),
+                    //\$${product.price}/g, style: cardPrice
+                    Expanded(child: const SizedBox()),
                     Container(
                       decoration: BoxDecoration(
-                        shape: .circle,
-                        color: AppColors.inkColor
+                        // shape: .circle,
+                        // color: AppColors.inkColor
                       ),
                       padding: .all(9),
-                      child: SvgPicture.asset(AppIcons.icAdd),
+                      //icAdd
+                      child: const SizedBox()
                     )
                   ],
                 )
