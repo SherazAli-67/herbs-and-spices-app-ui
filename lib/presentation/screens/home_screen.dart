@@ -33,9 +33,9 @@ class _HomeScreenState extends State<HomeScreen> {
               spacing: 22,
               children: [
                 Container(
-              height: .infinity,
-              decoration: BoxDecoration(
-               /* gradient: LinearGradient(colors: [
+                  height: .infinity,
+                  decoration: BoxDecoration(
+                     gradient: LinearGradient(colors: [
                   AppColors.offWhiteColor,
                   AppColors.gradientColor2,
                   AppColors.gradientColor2,
@@ -47,57 +47,59 @@ class _HomeScreenState extends State<HomeScreen> {
                       0.67,
                       1
                     ]
-                )*/
-              ),
-              child: Column(
-                mainAxisAlignment: .spaceEvenly,
-                children: [
-                  for (final category in AppData.categories)
-                    GestureDetector(
-                      onTap: () => setState(() => _selectedCategory = category),
-                      behavior: .opaque,
-                      child: Padding(
-                        padding: .symmetric(horizontal: 13.24),
-                        child: Stack(
-                          alignment: .topStart,
-                          children: [
-                            if (_selectedCategory == category)
-                              Align(
-                                alignment: .centerLeft,
-                                child: SizedBox(
-                                  width: 4,
-                                  height: 48,
-                                  child: DecoratedBox(
-                                    decoration: BoxDecoration(
-                                      // color: AppColors.inkColor,
-                                      // borderRadius: .horizontal(right: .circular(99)),
+                )
+                  ),
+                  child: Column(
+                    mainAxisAlignment: .spaceEvenly,
+                    children: [
+                      for (final category in AppData.categories)
+                        GestureDetector(
+                          onTap: () => setState(() => _selectedCategory = category),
+                          behavior: .opaque,
+                          child: Padding(
+                            padding: .symmetric(horizontal: 13.24),
+                            child: Stack(
+                              alignment: .topStart,
+                              children: [
+                                if (_selectedCategory == category)
+                                  Align(
+                                    alignment: .centerLeft,
+                                    child: SizedBox(
+                                      width: 4,
+                                      height: 48,
+                                      child: DecoratedBox(
+                                        decoration: BoxDecoration(
+                                          // color: AppColors.inkColor,
+                                          color: AppColors.inkColor,
+                                          borderRadius: .circular(99)
+                                          // borderRadius: .horizontal(right: .circular(99)),
+                                        ),
+                                      ),
                                     ),
                                   ),
+                                RotatedBox(
+                                    quarterTurns: 3,
+                                    //category,  _selectedCategory == category  ? AppTextStyles.categoryActive : AppTextStyles.categoryIdle,
+                                    child:  Text(category, style: _selectedCategory == category ? AppTextStyles.categoryActive : AppTextStyles.categoryIdle,)
                                 ),
-                              ),
-                            RotatedBox(
-                              quarterTurns: 3,
-                              //category,  _selectedCategory == category  ? AppTextStyles.categoryActive : AppTextStyles.categoryIdle,
-                              child:  const SizedBox()
+                              ],
                             ),
-                          ],
+                          ),
                         ),
-                      ),
-                    ),
-                ],
-              ),
-            ),
+                    ],
+                  ),
+                ),
                 Expanded(
                   child: Padding(padding: .only(top: 17), child: Column(
                     spacing: 22,
                     children: [
-                      // _buildCuisineChips(),
+                      _buildCuisineChips(),
                       Expanded(child: _buildProductGrid()),
                     ],
                   ),),
                 )
               ],
-        ))
+            ))
       ],
     );
   }
@@ -110,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           Positioned.fill(
             //icHeaderWave, fit: fill
-            child: const SizedBox()
+              child: SvgPicture.asset(AppIcons.icHeaderWave, fit: .fill,),
           ),
           SafeArea(
             bottom: false,
@@ -123,12 +125,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   Row(
                     children: [
                       //icDrawer
+                      SvgPicture.asset(AppIcons.icDrawer,),
                       const Spacer(),
                       Row(
                         spacing: 13,
                         children: [
                           //icSearch
+                          SvgPicture.asset(AppIcons.icSearch),
                           //icCart
+                          SvgPicture.asset(AppIcons.icCart),
                         ],
                       ),
                     ],
@@ -142,7 +147,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           spacing: 4,
                           children: [
                             //discover, discoverLabel,
+                            Text(StringConst.discover, style: AppTextStyles.discoverLabel,),
                             //yourTaste, discoverHero
+                            Text(StringConst.yourTaste, style: AppTextStyles.discoverHero,)
                           ],
                         ),
                       ),
@@ -150,11 +157,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         alignment: .center,
                         children: [
                           //icBadgeOff
+                          SvgPicture.asset(AppIcons.icBadgeOff),
                           Transform.rotate(
-                            angle: -0.33,
+                              angle: -0.33,
 
-                            //tenPercentOff, badgeOff
-                            child: const SizedBox()
+                              //tenPercentOff, badgeOff
+                              child: Text(StringConst.tenPercentOff, style: AppTextStyles.badgeOff,)
                           ),
                         ],
                       )
@@ -238,7 +246,7 @@ class _HomeScreenState extends State<HomeScreen> {
         decoration: BoxDecoration(
           color: AppColors.cardColor,
           borderRadius: .circular(11),
-        /*  boxShadow: [
+          /*  boxShadow: [
             BoxShadow(
               offset: Offset(-8.83, 8.83),
               blurRadius: 17.68,
@@ -259,20 +267,20 @@ class _HomeScreenState extends State<HomeScreen> {
             Stack(
               children: [
                 Container(
-                  decoration: BoxDecoration(
-                   /* borderRadius: .only(topRight: .circular(11), topLeft: .circular(11)),
-                    color: product.cardTint*/
-                  ),
-                  alignment: .center,
-                  //product.image, fit: cover
-                  child: const SizedBox()
+                    decoration: BoxDecoration(
+                      color: product.cardTint,
+                      borderRadius: .only(topLeft: .circular(11), topRight: .circular(11))
+                    ),
+                    alignment: .center,
+                    //product.image, fit: cover
+                    child: Image.asset(product.image, fit: .cover,)
                 ),
                 if(product.discountPercent != null)
                   Positioned(
                       right: 0,
                       top: 10,
                       //icDiscountRibbon
-                      child: const SizedBox()
+                      child: SvgPicture.asset(AppIcons.icDiscountRibbon)
                   )
               ],
             ),
@@ -280,18 +288,20 @@ class _HomeScreenState extends State<HomeScreen> {
               crossAxisAlignment: .start,
               children: [
                 //product.name, style: cardName
+                Text(product.name, style: AppTextStyles.cardName,),
                 Row(
                   children: [
-                    //\$${product.price}/g, style: cardPrice
-                    Expanded(child: const SizedBox()),
+                    Expanded(child: Text('\$${product.price}/g', style: AppTextStyles.cardPrice,)),
                     Container(
-                      decoration: BoxDecoration(
-                        // shape: .circle,
-                        // color: AppColors.inkColor
-                      ),
-                      padding: .all(9),
-                      //icAdd
-                      child: const SizedBox()
+                        decoration: BoxDecoration(
+                          shape: .circle,
+                          color: AppColors.inkColor
+                          // shape: .circle,
+                          // color: AppColors.inkColor
+                        ),
+                        padding: .all(9),
+                        //icAdd
+                        child: SvgPicture.asset(AppIcons.icAdd)
                     )
                   ],
                 )
