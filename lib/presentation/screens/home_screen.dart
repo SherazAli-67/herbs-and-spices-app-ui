@@ -32,7 +32,80 @@ class _HomeScreenState extends State<HomeScreen> {
       // spacing: 17,
       children: [
         _buildHeader(),
-        Expanded(child: _buildBody()),
+        Expanded(
+            child: Row(
+              spacing: 22,
+              children: [
+                Container(
+              height: .infinity,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(colors: [
+                  AppColors.offWhiteColor,
+                  AppColors.gradientColor2,
+                  AppColors.gradientColor2,
+                  AppColors.offWhiteColor
+                ],
+                    stops: [
+                      0,
+                      0.27,
+                      0.67,
+                      1
+                    ]
+                )
+              ),
+              child: Column(
+                mainAxisAlignment: .spaceEvenly,
+                children: [
+                  for (final category in AppData.categories)
+                    GestureDetector(
+                      onTap: () => setState(() => _selectedCategory = category),
+                      behavior: .opaque,
+                      child: Padding(
+                        padding: .symmetric(horizontal: 13.24),
+                        child: Stack(
+                          alignment: .topStart,
+                          children: [
+                            if (_selectedCategory == category)
+                              Align(
+                                alignment: .centerLeft,
+                                child: SizedBox(
+                                  width: 4,
+                                  height: 48,
+                                  child: DecoratedBox(
+                                    decoration: BoxDecoration(
+                                      color: AppColors.inkColor,
+                                      borderRadius: .horizontal(right: .circular(99)),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            RotatedBox(
+                              quarterTurns: 3,
+                              child: Text(
+                                category,
+                                style: _selectedCategory == category
+                                    ? AppTextStyles.categoryActive
+                                    : AppTextStyles.categoryIdle,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+            ),
+                Expanded(
+                  child: Padding(padding: .only(top: 17), child: Column(
+                    spacing: 22,
+                    children: [
+                      _buildCuisineChips(),
+                      Expanded(child: _buildProductGrid()),
+                    ],
+                  ),),
+                )
+              ],
+        ))
       ],
     );
   }
@@ -120,91 +193,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildBody() {
-    return Row(
-      crossAxisAlignment: .start,
-      children: [
-        _buildCategoryRail(),
-        Expanded(
-          child: Padding(
-            padding: .only(right: 16),
-            child: Column(
-              children: [
-                _buildCuisineChips(),
-                const SizedBox(height: 18),
-                Expanded(child: _buildProductGrid()),
-              ],
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildCategoryRail() {
-    return SizedBox(
-      width: 54,
-      child: Container(
-        // padding: .only(top: 40, bottom: 120),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [
-            AppColors.offWhiteColor,
-            AppColors.gradientColor2,
-            AppColors.gradientColor2,
-            AppColors.offWhiteColor
-          ],
-            stops: [
-              0,
-              0.27,
-              0.67,
-              1
-            ]
-          )
-        ),
-        child: Column(
-          mainAxisAlignment: .spaceEvenly,
-          children: [
-            for (final category in AppData.categories)
-              GestureDetector(
-                onTap: () => setState(() => _selectedCategory = category),
-                behavior: .opaque,
-                child: SizedBox(
-                  height: 72,
-                  child: Stack(
-                    alignment: .center,
-                    children: [
-                      if (_selectedCategory == category)
-                        Align(
-                          alignment: .centerLeft,
-                          child: SizedBox(
-                            width: 4,
-                            height: 48,
-                            child: DecoratedBox(
-                              decoration: BoxDecoration(
-                                color: AppColors.inkColor,
-                                borderRadius: .horizontal(right: .circular(2)),
-                              ),
-                            ),
-                          ),
-                        ),
-                      RotatedBox(
-                        quarterTurns: 3,
-                        child: Text(
-                          category,
-                          style: _selectedCategory == category
-                              ? AppTextStyles.categoryActive
-                              : AppTextStyles.categoryIdle,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-          ],
-        ),
-      ),
-    );
-  }
 
   Widget _buildCuisineChips() {
     return SizedBox(
@@ -238,29 +226,31 @@ class _HomeScreenState extends State<HomeScreen> {
     }
 
     return SingleChildScrollView(
-      padding: .only(bottom: 110),
-      child: Row(
-        crossAxisAlignment: .start,
-        spacing: 14,
-        children: [
-          Expanded(
-            child: Column(
-              spacing: 18,
-              children: [
-                for (final product in left) _buildProductCard(product),
-              ],
+      child: Padding(
+        padding: const .only(right: 20.0),
+        child: Row(
+          crossAxisAlignment: .start,
+          spacing: 14,
+          children: [
+            Expanded(
+              child: Column(
+                spacing: 17.66,
+                children: [
+                  for (final product in left) _buildProductCard(product),
+                ],
+              ),
             ),
-          ),
-          Expanded(
-            child: Column(
-              spacing: 18,
-              children: [
-                const SizedBox(height: 36),
-                for (final product in right) _buildProductCard(product),
-              ],
+            Expanded(
+              child: Column(
+                spacing: 17.66,
+                children: [
+                  const SizedBox(height: 36),
+                  for (final product in right) _buildProductCard(product),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -272,105 +262,63 @@ class _HomeScreenState extends State<HomeScreen> {
         decoration: BoxDecoration(
           color: AppColors.cardColor,
           borderRadius: .circular(11),
+          boxShadow: [
+            BoxShadow(
+              offset: Offset(-8.83, 8.83),
+              blurRadius: 17.68,
+              spreadRadius: 0,
+              color: AppColors.shadowColor.withValues(alpha: 0.5)
+            ),
+            BoxShadow(
+                offset: Offset(8.83, 8.83),
+                blurRadius: 17.66,
+                spreadRadius: 0,
+                color: AppColors.shadowColor.withValues(alpha: 0.5)
+            )
+          ]
         ),
         child: Column(
           crossAxisAlignment: .start,
           children: [
-            ClipRRect(
-              borderRadius: const .vertical(top: .circular(11)),
-              child: SizedBox(
-                height: 145,
-                width: double.infinity,
-                child: ColoredBox(
-                  color: product.cardTint,
-                  child: Stack(
-                    children: [
-                      Center(
-                        child: Image.asset(
-                          product.image,
-                          height: 95,
-                          fit: .contain,
-                        ),
-                      ),
-                      if (product.discountPercent != null)
-                        Positioned(
-                          top: 12,
-                          right: 0,
-                          child: SizedBox(
-                            width: 72,
-                            height: 22,
-                            child: Stack(
-                              alignment: .center,
-                              children: [
-                                SvgPicture.asset(
-                                  AppIcons.icDiscountRibbon,
-                                  width: 72,
-                                  height: 22,
-                                  fit: .fill,
-                                ),
-                                Text(
-                                  StringConst.percentOff(product.discountPercent!),
-                                  style: AppTextStyles.discountRibbon,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                    ],
+            Stack(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: .only(topRight: .circular(11), topLeft: .circular(11)),
+                    color: product.cardTint
                   ),
+                  alignment: .center,
+                  child: Image.asset(product.image,fit: .cover,),
                 ),
-              ),
+                if(product.discountPercent != null)
+                  Positioned(
+                      right: 0,
+                      top: 10,
+                      child: SvgPicture.asset(AppIcons.icDiscountRibbon),
+                  )
+              ],
             ),
-            Padding(
-              padding: .fromLTRB(10, 10, 10, 12),
-              child: Row(
-                crossAxisAlignment: .end,
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: .start,
-                      spacing: 6,
-                      children: [
-                        Text(product.name, style: AppTextStyles.cardName,),
-                        Text(StringConst.pricePerGram(product.price), style: AppTextStyles.cardPrice,),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    width: 31,
-                    height: 31,
-                    decoration: BoxDecoration(
-                      color: AppColors.inkColor,
-                      shape: .circle,
-                    ),
-                    alignment: .center,
-                    child: SvgPicture.asset(AppIcons.icAdd, width: 14, height: 14,),
-                  ),
-                ],
-              ),
-            ),
+            Padding(padding: .symmetric(horizontal: 8.83, vertical: 17), child: Column(
+              crossAxisAlignment: .start,
+              children: [
+                Text(product.name, style: AppTextStyles.cardName,),
+                Row(
+                  children: [
+                    Expanded(child: Text('\$${product.price}/g', style: AppTextStyles.cardPrice,)),
+                    Container(
+                      decoration: BoxDecoration(
+                        shape: .circle,
+                        color: AppColors.inkColor
+                      ),
+                      padding: .all(9),
+                      child: SvgPicture.asset(AppIcons.icAdd),
+                    )
+                  ],
+                )
+              ],
+            ),)
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildBottomNav() {
-    return Container(
-      height: 73,
-      decoration: BoxDecoration(
-        color: AppColors.inkColor,
-        borderRadius: .circular(36),
-      ),
-      padding: .symmetric(horizontal: 36),
-      child: Row(
-        mainAxisAlignment: .spaceBetween,
-        children: [
-          SvgPicture.asset(AppIcons.icHome, width: 26, height: 26,),
-          SvgPicture.asset(AppIcons.icFavorite, width: 26, height: 26,),
-          SvgPicture.asset(AppIcons.icReels, width: 26, height: 26,),
-          SvgPicture.asset(AppIcons.icProfile, width: 26, height: 26,),
-        ],
       ),
     );
   }
